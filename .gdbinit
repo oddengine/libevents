@@ -1,0 +1,1 @@
+set startyup-with-shell off
