@@ -2,6 +2,12 @@
 
 #include "events.h"
 
+enum EventResult
+{
+    ER_NONE = 0,
+    ER_CONSUMED = 1,
+};
+
 class Event : public IEvent
 {
 public:
@@ -33,5 +39,5 @@ public:
 protected:
     std::string m_type;
     void *m_target;
-    bool m_stopPropagation;
+    EventResult m_result = ER_NONE;
 };

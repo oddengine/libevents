@@ -36,12 +36,12 @@ void *Event::target()
 
 bool Event::stoppedPropagation()
 {
-    return m_stopPropagation;
+    return !!(m_result & ER_CONSUMED);
 }
 
 void Event::stopPropagation()
 {
-    m_stopPropagation = true;
+    m_result = static_cast<EventResult>(m_result | ER_CONSUMED);
 }
 
 std::shared_ptr<IEvent> Event::clone()
