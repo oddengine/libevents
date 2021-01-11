@@ -17,7 +17,7 @@ public:
 
     void addEventListener(const std::string &type, std::shared_ptr<EventListener> listener) override;
     void removeEventListener(const std::string &type, std::shared_ptr<EventListener> listener) override;
-    bool hasEventListener(const std::string &type) override;
+    bool hasEventListener(const std::string &type = "") override;
 
 protected:
     void dispatchEvent(std::shared_ptr<IEvent> event) override;
