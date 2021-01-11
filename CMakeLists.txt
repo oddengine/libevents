@@ -28,6 +28,7 @@ include_directories(/usr/local/include ${TOP_DIR}/src)
 link_directories(/usr/local/lib)
 
 set(EVENTS 
+        ${TOP_DIR}/src/base/error.cc 
         ${TOP_DIR}/src/events/events.cc 
         ${TOP_DIR}/src/events/event.cc 
         ${TOP_DIR}/src/events/errorevent.cc 

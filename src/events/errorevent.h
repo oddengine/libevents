@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../base/error.h"
 #include "event.h"
 
 class ErrorEvent : public Event

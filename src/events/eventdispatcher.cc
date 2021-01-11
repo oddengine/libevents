@@ -1,4 +1,5 @@
 #include "eventdispatcher.h"
+#include "../base/error.h"
 #include "event.h"
 
 #include <thread>
@@ -17,7 +18,7 @@ void EventDispatcher::addEventListener(const std::string &type, std::shared_ptr<
 {
     if (type == "" || listener == nullptr)
     {
-        throw new Error("DataError", "Provided data is inadequate.");
+        throw Error::DataError;
     }
 
     std::lock_guard<std::recursive_mutex> lock(m_mtx);
@@ -30,7 +31,7 @@ void EventDispatcher::removeEventListener(const std::string &type, std::shared_p
 {
     if (type == "" || listener == nullptr)
     {
-        throw new Error("DataError", "Provided data is inadequate.");
+        throw Error::DataError;
     }
 
     std::lock_guard<std::recursive_mutex> lock(m_mtx);
@@ -56,14 +57,14 @@ void EventDispatcher::dispatchEvent(std::shared_ptr<IEvent> event)
 {
     if (event == nullptr)
     {
-        throw new Error("DataError", "Provided data is inadequate.");
+        throw Error::DataError;
     }
 
     std::lock_guard<std::recursive_mutex> lock(m_mtx);
 
     if (++m_recursion > MAX_RECURSION)
     {
-        throw new Error("AbortError", "Max recursion reached.");
+        throw Error::AbortError;
     }
 
     // Make a shallow copy of the listener map, so that it triggers the event to the exact listeners.

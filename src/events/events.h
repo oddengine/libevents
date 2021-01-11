@@ -1,21 +1,13 @@
 #pragma once
 
+#include "../base/object.h"
+
 #include <atomic>
 #include <functional>
 #include <memory>
 #include <string>
 
-class Error
-{
-public:
-    Error(const std::string &name, const std::string &message = "");
-    virtual ~Error();
-
-    std::string m_name;
-    std::string m_message;
-};
-
-class IEvent
+class IEvent : Object
 {
 public:
     virtual std::string type() = 0;
@@ -24,7 +16,6 @@ public:
 
     virtual void stopPropagation() = 0;
     virtual std::shared_ptr<IEvent> clone() = 0;
-    virtual std::string toString() = 0;
 };
 
 typedef std::function<void(std::shared_ptr<IEvent>)> IEventHandler;
