@@ -10,6 +10,7 @@ EventDispatcher::EventDispatcher()
 
 EventDispatcher::~EventDispatcher()
 {
+    m_listeners.clear();
 }
 
 void EventDispatcher::addEventListener(const std::string &type, std::shared_ptr<EventListener> listener)

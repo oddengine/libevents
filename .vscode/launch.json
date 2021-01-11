@@ -8,12 +8,15 @@
             "name": "Launch",
             "type": "cppdbg",
             "request": "launch",
-            "MIMode": "gdb",
+            "MIMode": "lldb",
             // "MIDebuggerPath": "",
             "program": "${workspaceRoot}/bin/libstud",
             "cwd": "${workspaceRoot}",
             "environment": [],
             "args": [],
+            "logging": {
+                // "engineLogging": true,
+            }
         }
     ]
 }

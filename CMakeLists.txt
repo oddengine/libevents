@@ -42,7 +42,7 @@ set(SOURCES
 
 add_executable(${PACKAGE_NAME} ${SOURCES})
 
-set(LIBRARIES z pthread)
+set(LIBRARIES)
 
 target_link_libraries(${PACKAGE_NAME} ${LIBRARIES})
 

@@ -9,7 +9,7 @@ class Error
 {
 public:
     Error(const std::string &name, const std::string &message = "");
-    ~Error();
+    virtual ~Error();
 
     std::string m_name;
     std::string m_message;

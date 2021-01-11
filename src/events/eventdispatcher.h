@@ -13,7 +13,7 @@ class EventDispatcher : public IEventDispatcher
 {
 public:
     EventDispatcher();
-    ~EventDispatcher();
+    virtual ~EventDispatcher();
 
     void addEventListener(const std::string &type, std::shared_ptr<EventListener> listener) override;
     void removeEventListener(const std::string &type, std::shared_ptr<EventListener> listener) override;
