@@ -14,10 +14,10 @@ const std::string Event::INIT = "init";
 const std::string Event::OPEN = "open";
 const std::string Event::REMOVED = "removed";
 
-Event::Event(const std::string &type, void *target)
+Event::Event(const std::string &type, void *source)
 {
     m_type = type;
-    m_target = target;
+    m_source = source;
 }
 
 Event::~Event()
@@ -29,9 +29,19 @@ std::string Event::type()
     return m_type;
 }
 
+void *Event::source()
+{
+    return m_source;
+}
+
 void *Event::target()
 {
     return m_target;
+}
+
+void Event::set_target(void *target)
+{
+    m_target = target;
 }
 
 bool Event::stoppedPropagation()

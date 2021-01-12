@@ -25,10 +25,11 @@ public:
     static const std::string OPEN;
     static const std::string REMOVED;
 
-    Event(const std::string &type, void *target);
+    Event(const std::string &type, void *source);
     virtual ~Event();
 
     std::string type() override;
+    void *source() override;
     void *target() override;
     bool stoppedPropagation() override;
 
@@ -37,7 +38,10 @@ public:
     std::string toString() override;
 
 protected:
+    void set_target(void *target) override;
+
     std::string m_type;
+    void *m_source;
     void *m_target;
     EventResult m_result = ER_NONE;
 };

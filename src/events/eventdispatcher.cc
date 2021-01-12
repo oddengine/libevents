@@ -60,6 +60,8 @@ void EventDispatcher::dispatchEvent(std::shared_ptr<IEvent> event)
         throw Error::DataError;
     }
 
+    event->set_target(this);
+
     std::lock_guard<std::recursive_mutex> lock(m_mtx);
 
     if (++m_recursion > MAX_RECURSION)

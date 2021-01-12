@@ -2,8 +2,8 @@
 
 const std::string ErrorEvent::ERROR = "error";
 
-ErrorEvent::ErrorEvent(const std::string &type, void *target, const std::string &name, const std::string &message)
-    : Event(type, target),
+ErrorEvent::ErrorEvent(const std::string &type, void *source, const std::string &name, const std::string &message)
+    : Event(type, source),
       m_error(name, message)
 {
 }

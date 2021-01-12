@@ -8,7 +8,7 @@ class ErrorEvent : public Event
 public:
     static const std::string ERROR;
 
-    ErrorEvent(const std::string &type, void *target, const std::string &name, const std::string &message = "");
+    ErrorEvent(const std::string &type, void *source, const std::string &name, const std::string &message = "");
     virtual ~ErrorEvent();
 
     std::string name();

@@ -11,11 +11,17 @@ class IEvent : Object
 {
 public:
     virtual std::string type() = 0;
+    virtual void *source() = 0;
     virtual void *target() = 0;
     virtual bool stoppedPropagation() = 0;
 
     virtual void stopPropagation() = 0;
     virtual std::shared_ptr<IEvent> clone() = 0;
+
+protected:
+    friend class EventDispatcher;
+
+    virtual void set_target(void *target) = 0;
 };
 
 typedef std::function<void(std::shared_ptr<IEvent>)> IEventHandler;
