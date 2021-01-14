@@ -13,7 +13,7 @@ void onEvent(std::shared_ptr<IEvent> e)
     n++;
 }
 
-void onComplete2(std::shared_ptr<IEvent> e)
+void onComplete(std::shared_ptr<IEvent> e)
 {
     n++;
 
@@ -25,7 +25,7 @@ void onComplete2(std::shared_ptr<IEvent> e)
 TEST(EventDispatcher, addEventDispatcher)
 {
     listener1 = std::make_shared<EventListener>(onEvent);
-    listener2 = std::make_shared<EventListener>(onComplete2);
+    listener2 = std::make_shared<EventListener>(onComplete);
     listener3 = std::make_shared<EventListener>(onEvent);
 
     auto dummy = std::make_shared<DummyEventDispatcher>();
