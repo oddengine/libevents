@@ -2,7 +2,10 @@
 
 #include "../../src/events/eventtarget.h"
 
-class DummyEventTarget : public EventTarget {
+using namespace odd;
+
+class DummyEventTarget : public EventTarget
+{
 public:
     DummyEventTarget();
     virtual ~DummyEventTarget();

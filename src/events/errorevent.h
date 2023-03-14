@@ -2,26 +2,31 @@
 
 #include "event.h"
 
-class ErrorEvent : public Event
+namespace odd
 {
-public:
-    static const std::string ERROR;
 
-    static ErrorEvent *Create(const std::string &type, IEventTarget *target, const std::string &name, const std::string &message = "")
+    class ErrorEvent : public Event
     {
-        return new ErrorEvent(type, target, name, message);
-    }
+    public:
+        static const std::string ERROR;
 
-    ErrorEvent(const std::string &type, IEventTarget *target, const std::string &name, const std::string &message = "");
-    virtual ~ErrorEvent();
+        static ErrorEvent *Create(const std::string &type, IEventTarget *target, const std::string &name, const std::string &message = "")
+        {
+            return new ErrorEvent(type, target, name, message);
+        }
 
-    std::string Name() { return name_; }
-    std::string Message() { return message_; }
+        ErrorEvent(const std::string &type, IEventTarget *target, const std::string &name, const std::string &message = "");
+        virtual ~ErrorEvent();
 
-    IEvent *Clone() override;
-    std::string String() override;
+        std::string Name() { return name_; }
+        std::string Message() { return message_; }
 
-protected:
-    std::string name_;
-    std::string message_;
-};
+        IEvent *Clone() override;
+        std::string String() override;
+
+    protected:
+        std::string name_;
+        std::string message_;
+    };
+
+} // namespace odd

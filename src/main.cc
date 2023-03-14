@@ -1,6 +1,8 @@
 #include "events/event.h"
 #include "../tests/events/dummyeventtarget.h"
 
+using namespace odd;
+
 EventListener *listener;
 
 void onComplete(IEvent *e)

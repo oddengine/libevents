@@ -1,6 +1,4 @@
 .DS_Store
 */.DS_Store
-CMakeSettings.json
 bin/
-out/
 logs/
