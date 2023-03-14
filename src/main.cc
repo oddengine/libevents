@@ -1,5 +1,3 @@
-#include <string>
-
 #include "events/event.h"
 #include "../tests/events/dummyeventtarget.h"
 
