@@ -2,8 +2,8 @@ add_definitions("-DUT_ENABLED")
 
 set(UT_SOURCES 
         ${EVENTS} 
-        ${TOP_DIR}/tests/events/dummyeventdispatcher.cc 
-        ${TOP_DIR}/tests/events/eventdispatcher_test.cc 
+        ${TOP_DIR}/tests/events/dummyeventtarget.cc 
+        ${TOP_DIR}/tests/events/eventtarget_test.cc 
         ${TOP_DIR}/tests/main.cc 
 )
 

@@ -2,9 +2,10 @@
 
 const std::string ErrorEvent::ERROR = "error";
 
-ErrorEvent::ErrorEvent(const std::string &type, void *source, const std::string &name, const std::string &message)
-    : Event(type, source),
-      m_error(name, message)
+ErrorEvent::ErrorEvent(const std::string &type, IEventTarget *target, const std::string &name, const std::string &message)
+    : Event(type, target),
+      name_(name),
+      message_(message)
 {
 }
 
@@ -12,12 +13,12 @@ ErrorEvent::~ErrorEvent()
 {
 }
 
-std::shared_ptr<IEvent> ErrorEvent::clone()
+IEvent *ErrorEvent::Clone()
 {
-    return std::make_shared<ErrorEvent>(m_type, m_target, m_error.m_name, m_error.m_message);
+    return new ErrorEvent(type_, target_, name_, message_);
 }
 
-std::string ErrorEvent::toString()
+std::string ErrorEvent::String()
 {
-    return "[ErrorEvent type=" + m_type + ", name=" + m_error.m_name + ", message=" + m_error.m_message + "]";
+    return "[ErrorEvent type=" + type_ + ", name=" + name_ + ", message=" + message_ + "]";
 }

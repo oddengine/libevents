@@ -1,48 +1,41 @@
 #pragma once
 
-#include "../base/object.h"
-
-#include <atomic>
-#include <functional>
-#include <memory>
 #include <string>
+
+#include "eventlistener.h"
+
+class IEventTarget;
+
+class Object
+{
+public:
+    virtual std::string String() = 0;
+};
 
 class IEvent : Object
 {
 public:
-    virtual std::string type() = 0;
-    virtual void *source() = 0;
-    virtual void *target() = 0;
-    virtual bool stoppedPropagation() = 0;
-
-    virtual void stopPropagation() = 0;
-    virtual std::shared_ptr<IEvent> clone() = 0;
-
-protected:
-    friend class EventDispatcher;
-
-    virtual void set_target(void *target) = 0;
-};
-
-typedef std::function<void(std::shared_ptr<IEvent>)> IEventHandler;
-
-class EventListener
-{
-public:
-    EventListener(IEventHandler handler, int count = 0);
-    ~EventListener();
-
-    IEventHandler m_handler;
-    std::atomic<int> m_count;
-};
-
-class IEventDispatcher
-{
-public:
-    virtual void addEventListener(const std::string &type, std::shared_ptr<EventListener> listener) = 0;
-    virtual void removeEventListener(const std::string &type, std::shared_ptr<EventListener> listener) = 0;
-    virtual bool hasEventListener(const std::string &type) = 0;
+    virtual void SetType(std::string event) = 0;
+    virtual std::string Type() = 0;
+    virtual void SetTarget(IEventTarget *target) = 0;
+    virtual IEventTarget *Target() = 0;
+    virtual void SetCurrentTarget(IEventTarget *target) = 0;
+    virtual IEventTarget *CurrentTarget() = 0;
+    virtual void StopPropagation() = 0;
+    virtual bool PropagationStopped() = 0;
+    virtual IEvent *Clone() = 0;
 
 protected:
-    virtual void dispatchEvent(std::shared_ptr<IEvent> event) = 0;
+    friend class IEventTarget;
+};
+
+class IEventTarget
+{
+public:
+    virtual void AddEventListener(const std::string &type, EventListener *listener) = 0;
+    virtual void RemoveEventListener(const std::string &type, EventListener *listener) = 0;
+    virtual bool HasEventListeners(const std::string &type = "") = 0;
+
+protected:
+    virtual EventResult DispatchEvent(IEvent *e) = 0;
 };

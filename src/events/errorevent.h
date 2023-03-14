@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../base/error.h"
 #include "event.h"
 
 class ErrorEvent : public Event
@@ -8,15 +7,21 @@ class ErrorEvent : public Event
 public:
     static const std::string ERROR;
 
-    ErrorEvent(const std::string &type, void *source, const std::string &name, const std::string &message = "");
+    static ErrorEvent *Create(const std::string &type, IEventTarget *target, const std::string &name, const std::string &message = "")
+    {
+        return new ErrorEvent(type, target, name, message);
+    }
+
+    ErrorEvent(const std::string &type, IEventTarget *target, const std::string &name, const std::string &message = "");
     virtual ~ErrorEvent();
 
-    std::string name();
-    std::string message();
+    std::string Name() { return name_; }
+    std::string Message() { return message_; }
 
-    std::shared_ptr<IEvent> clone() override;
-    std::string toString() override;
+    IEvent *Clone() override;
+    std::string String() override;
 
 protected:
-    Error m_error;
+    std::string name_;
+    std::string message_;
 };

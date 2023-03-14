@@ -1,21 +1,21 @@
 #include <string>
 
 #include "events/event.h"
-#include "../tests/events/dummyeventdispatcher.h"
+#include "../tests/events/dummyeventtarget.h"
 
-std::shared_ptr<EventListener> listener;
+EventListener *listener;
 
-void onComplete(std::shared_ptr<IEvent> e)
+void onComplete(IEvent *e)
 {
-    auto dummy = (DummyEventDispatcher *)e->target();
-    dummy->removeEventListener(Event::COMPLETE, listener);
+    auto dummy = (DummyEventTarget *)e->Target();
+    dummy->RemoveEventListener(Event::COMPLETE, listener);
 }
 
 int main(int argc, char *argv[])
 {
-    listener = std::make_shared<EventListener>(onComplete);
+    listener = EventListener::Create(onComplete);
 
-    auto dummy = std::make_shared<DummyEventDispatcher>();
-    dummy->addEventListener(Event::COMPLETE, listener);
-    dummy->dosomething();
+    auto dummy = std::make_shared<DummyEventTarget>();
+    dummy->AddEventListener(Event::COMPLETE, listener);
+    dummy->DoSomething();
 }

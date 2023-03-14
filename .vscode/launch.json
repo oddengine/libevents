@@ -10,7 +10,7 @@
             "request": "launch",
             "MIMode": "lldb",
             // "MIDebuggerPath": "",
-            "program": "${workspaceRoot}/bin/libstud",
+            "program": "${workspaceRoot}/bin/libevents",
             "cwd": "${workspaceRoot}",
             "environment": [],
             "args": [],

@@ -8,7 +8,7 @@ if (POLICY CMP0057)
 endif()
 
 # package information
-set(PACKAGE_NAME      "libstud")
+set(PACKAGE_NAME      "libevents")
 set(PACKAGE_VERSION   "0.1.00")
 set(PACKAGE_STRING    "${PACKAGE_NAME} ${PACKAGE_VERSION}")
 set(PACKAGE_TARNAME   "${PACKAGE_NAME}-${PACKAGE_VERSION}")
@@ -28,16 +28,16 @@ include_directories(/usr/local/include ${TOP_DIR}/src)
 link_directories(/usr/local/lib)
 
 set(EVENTS 
-        ${TOP_DIR}/src/base/error.cc 
-        ${TOP_DIR}/src/events/events.cc 
+        ${TOP_DIR}/src/events/exception.cc 
+        ${TOP_DIR}/src/events/eventlistener.cc 
         ${TOP_DIR}/src/events/event.cc 
         ${TOP_DIR}/src/events/errorevent.cc 
-        ${TOP_DIR}/src/events/eventdispatcher.cc 
+        ${TOP_DIR}/src/events/eventtarget.cc 
 )
 
 set(SOURCES 
         ${EVENTS} 
-        ${TOP_DIR}/tests/events/dummyeventdispatcher.cc 
+        ${TOP_DIR}/tests/events/dummyeventtarget.cc 
         ${TOP_DIR}/src/main.cc 
 )
 

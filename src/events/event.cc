@@ -12,54 +12,67 @@ const std::string Event::DEACTIVATE = "deactivate";
 const std::string Event::IDLE = "idle";
 const std::string Event::INIT = "init";
 const std::string Event::OPEN = "open";
+const std::string Event::RELEASE = "release";
 const std::string Event::REMOVED = "removed";
 
-Event::Event(const std::string &type, void *source)
+Event::Event(const std::string &type, IEventTarget *target)
+    : type_(type),
+      target_(target),
+      current_target_(nullptr),
+      propagation_stopped_(false)
 {
-    m_type = type;
-    m_source = source;
 }
 
 Event::~Event()
 {
 }
 
-std::string Event::type()
+void Event::SetType(std::string type)
 {
-    return m_type;
+    type_ = type;
 }
 
-void *Event::source()
+std::string Event::Type()
 {
-    return m_source;
+    return type_;
 }
 
-void *Event::target()
+void Event::SetTarget(IEventTarget *target)
 {
-    return m_target;
+    target_ = target;
 }
 
-void Event::set_target(void *target)
+IEventTarget *Event::Target()
 {
-    m_target = target;
+    return target_;
 }
 
-bool Event::stoppedPropagation()
+void Event::SetCurrentTarget(IEventTarget *target)
 {
-    return !!(m_result & ER_CONSUMED);
+    current_target_ = target;
 }
 
-void Event::stopPropagation()
+IEventTarget *Event::CurrentTarget()
 {
-    m_result = static_cast<EventResult>(m_result | ER_CONSUMED);
+    return current_target_;
 }
 
-std::shared_ptr<IEvent> Event::clone()
+void Event::StopPropagation()
 {
-    return std::make_shared<Event>(m_type, m_target);
+    propagation_stopped_ = true;
 }
 
-std::string Event::toString()
+bool Event::PropagationStopped()
 {
-    return "[Event type=" + m_type + "]";
+    return propagation_stopped_;
+}
+
+IEvent *Event::Clone()
+{
+    return new Event(type_, target_);
+}
+
+std::string Event::String()
+{
+    return "[Event type=" + type_ + "]";
 }
