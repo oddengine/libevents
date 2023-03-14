@@ -1,5 +1,7 @@
 # libevents
 
+Observer-Pattern event-driven module with recursive_mutex in C++.
+
 ## Example
 
 ```cpp
